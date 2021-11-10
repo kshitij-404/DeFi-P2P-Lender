@@ -1,4 +1,5 @@
 pragma solidity >=0.4.22 <0.9.0;
+pragma experimental ABIEncoderV2;
 
 contract Lending {
     enum ProposalState {
@@ -86,24 +87,24 @@ contract Lending {
         return potential_lenders;
     }
 
-    function acceptLender(uint256 _loanId, uint256 _proposalId) public payable {
-        loans.push(
-            Loan(
-                _loanId,
-                loanToLender[_loanId],
-                potential_lenders[_loanId].loanAmount,
-                potential_lenders[_loanId].interestRate,
-                _proposalId,
-                block.timestamp,
-                LoanState.PAID
-            )
-        );
+    // function acceptLender(uint256 _loanId, uint256 _proposalId) public payable {
+    //     loans.push(
+    //         Loan(
+    //             _loanId,
+    //             loanToLender[_loanId],
+    //             potential_lenders[_loanId].loanAmount,
+    //             potential_lenders[_loanId].interestRate,
+    //             _proposalId,
+    //             block.timestamp,
+    //             LoanState.PAID
+    //         )
+    //     );
 
-        proposals[_proposalId].state = ProposalState.ACCEPTED;
+    //     proposals[_proposalId].state = ProposalState.ACCEPTED;
 
-        (bool success, ) = msg.sender.call{
-            value: potential_lenders[_loanId].loanAmount
-        }("");
-        require(success, "Transfer failed.");
-    }
+    //     (bool success, ) = msg.sender.call{
+    //         value: potential_lenders[_loanId].loanAmount
+    //     }("");
+    //     require(success, "Transfer failed.");
+    // }
 }
