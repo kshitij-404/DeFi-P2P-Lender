@@ -1,13 +1,19 @@
 pragma solidity >=0.4.22 <0.9.0;
 pragma experimental ABIEncoderV2;
 
+import "./SafeMath.sol";
+
 contract Lending {
+    using SafeMath for uint256;
+    using SafeMath for uint256;
+
     enum ProposalState {
         ACCEPTED,
         ACCEPTING,
         WAITING
     }
     enum LoanState {
+        REPAID,
         ACCEPTED,
         WAITING,
         PAID,
@@ -87,24 +93,68 @@ contract Lending {
         return potential_lenders;
     }
 
-    // function acceptLender(uint256 _loanId, uint256 _proposalId) public payable {
-    //     loans.push(
-    //         Loan(
-    //             _loanId,
-    //             loanToLender[_loanId],
-    //             potential_lenders[_loanId].loanAmount,
-    //             potential_lenders[_loanId].interestRate,
-    //             _proposalId,
-    //             block.timestamp,
-    //             LoanState.PAID
-    //         )
-    //     );
+    function acceptLender(uint256 _loanId, uint256 _proposalId) public payable {
+        loans.push(
+            Loan(
+                _loanId,
+                loanToLender[_loanId],
+                potential_lenders[_loanId].loanAmount,
+                potential_lenders[_loanId].interestRate,
+                _proposalId,
+                block.timestamp,
+                LoanState.PAID
+            )
+        );
 
-    //     proposals[_proposalId].state = ProposalState.ACCEPTED;
+        proposals[_proposalId].state = ProposalState.ACCEPTED;
 
-    //     (bool success, ) = msg.sender.call{
-    //         value: potential_lenders[_loanId].loanAmount
-    //     }("");
-    //     require(success, "Transfer failed.");
-    // }
+        (bool success, ) = msg.sender.call.value(
+            potential_lenders[_loanId].loanAmount
+        )("");
+        require(success, "Transfer failed.");
+    }
+
+    function repayAmount(uint256 _loanId) public view returns (uint256) {
+        if (loans[_loanId].state == LoanState.ACCEPTED) {
+            uint256 startTime = loans[_loanId].time;
+            uint256 finalAmount = 0;
+            uint256 principalValue = loans[_loanId].loanAmount;
+            uint256 paymentTime = block.timestamp;
+            uint256 interestRate = loans[_loanId].interestRate;
+            uint256 loanTime = paymentTime - startTime;
+
+            uint256 interest = (
+                principalValue.mul(interestRate).mul(loanTime)
+            ) / (365 * 24 * 60 * 60 * 100);
+
+            finalAmount.add(interest);
+            finalAmount.add(principalValue);
+
+            return finalAmount;
+        }
+    }
+
+    function repayLoan(uint256 _loanId) public payable {
+        uint256 pendingAmount = repayAmount(_loanId);
+        uint256 paid = msg.value;
+
+        if (paid >= pendingAmount) {
+            uint256 remainingValue = paid - pendingAmount;
+
+            (bool success, ) = msg.sender.call.value(pendingAmount)("");
+            require(success, "Transfer failed.");
+
+            (bool done, ) = loans[_loanId].lender.call.value(remainingValue)(
+                ""
+            );
+            require(done, "Transfer failed.");
+
+            loans[_loanId].state = LoanState.REPAID;
+        } else {
+            (bool success, ) = msg.sender.call.value(paid)("");
+            require(success, "Transfer failed.");
+
+            loans[_loanId].state = LoanState.REPAID;
+        }
+    }
 }
