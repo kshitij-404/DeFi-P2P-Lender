@@ -30,6 +30,31 @@ contract('Lending', async ([owner, alice, bob]) => {
     
   })
 
+
+  it("should allow lender to accept a borrower's proposal", async () => {
+    await contractInstance.createProposal(
+      100,
+      50,
+      "0x6162636400000000000000000000000000000000000000000000000000000000",
+      { from: alice }
+    );
+    await contractInstance.acceptProposal(10, 2, 0, {
+      from: bob,
+      gasPrice: 8000000000,
+      gas: 4700000,
+    });
+
+    const loan = await contractInstance.potential_lenders(0);
+    assert.equal(loan.loanId, 0);
+    assert.equal(loan.loanAmount, 10);
+    assert.equal(loan.interestRate, 2);
+    assert.equal(loan.proposalId, 0);
+    assert.equal(loan.time, 0);
+
+    const lender = await contractInstance.loanToLender(0);
+    assert.equal(lender, bob);
+  });
+
   it("should accept the lender", async () => {
     try{
       await contractInstance.createProposal(10, 50, "0x6162636400000000000000000000000000000000000000000000000000000000", {from:alice});
