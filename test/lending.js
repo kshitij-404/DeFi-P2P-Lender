@@ -8,6 +8,52 @@ contract('Lending', async ([owner, alice, bob]) => {
     contractInstance = await Lending.new({from:owner});
   })
 
+  it("should create a new proposal", async () => {
+    try{
+      const {logs} = await contractInstance.createProposal(100, 50, "0x6162636400000000000000000000000000000000000000000000000000000000", {from:alice});
+
+      const proposal = await contractInstance.proposals(0);
+      assert.equal(proposal.borrower, alice)
+      assert.equal(proposal.amount, 100)
+      assert.equal(proposal.time, 50)
+      assert.equal(proposal.mortgage, "0x6162636400000000000000000000000000000000000000000000000000000000")
+      assert.equal(proposal.state, 2)
+
+      const borrower = await contractInstance.proposalToBorrower(0);
+      assert.equal(borrower, alice);
+    }
+    catch(err)
+    {
+      assert.equal(err,null,err);
+    }
+    
+    
+  })
+
+  it("should accept the lender", async () => {
+    try{
+      await contractInstance.createProposal(10, 50, "0x6162636400000000000000000000000000000000000000000000000000000000", {from:alice});
+      await contractInstance.acceptProposal(10, 5, 0, {from: bob});
+    
+      await contractInstance.sendETHtoContract({from:bob, value:10});
+      
+      await contractInstance.acceptLender(0, 0, {from: alice, gasPrice: 8000000000, gas: 4700000});
+        
+  
+      const loan = await contractInstance.loans(0);
+      assert.equal(loan.lender, bob);
+      assert.equal(loan.loanAmount, 10);
+      assert.equal(loan.interestRate, 5);
+      assert.equal(loan.proposalId, 0);
+      assert.equal(loan.state, 3);
+    }
+    catch(err)
+    {
+      assert.equal(err,null,err);
+    }
+    
+  })
+
   it("should repay the amount to lender", async () => {
     try {
       const log = await contractInstance.createProposal(
@@ -50,18 +96,5 @@ contract('Lending', async ([owner, alice, bob]) => {
     contractInstance = await Lending.new();
   })
 
-  it("should create a new proposal", async () => {
-    const {logs} = await contractInstance.createProposal(100, 50, "0x6162636400000000000000000000000000000000000000000000000000000000", {from:alice});
-
-    const proposal = await contractInstance.proposals(0);
-    assert.equal(proposal.borrower, alice)
-    assert.equal(proposal.amount, 100)
-    assert.equal(proposal.time, 50)
-    assert.equal(proposal.mortgage, "0x6162636400000000000000000000000000000000000000000000000000000000")
-    assert.equal(proposal.state, 2)
-
-    const borrower = await contractInstance.proposalToBorrower(0);
-    assert.equal(borrower, alice);
-    
-  })
+  
 });
