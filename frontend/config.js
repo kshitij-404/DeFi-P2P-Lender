@@ -172,9 +172,9 @@ const abi = [
           "type": "uint256"
         },
         {
-          "internalType": "bytes32",
+          "internalType": "string",
           "name": "mortgage",
-          "type": "bytes32"
+          "type": "string"
         },
         {
           "internalType": "enum Lending.ProposalState",
@@ -200,9 +200,9 @@ const abi = [
           "type": "uint256"
         },
         {
-          "internalType": "bytes32",
+          "internalType": "string",
           "name": "_mortgage",
-          "type": "bytes32"
+          "type": "string"
         }
       ],
       "name": "createProposal",

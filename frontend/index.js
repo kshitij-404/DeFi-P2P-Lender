@@ -7,7 +7,7 @@ fileChange = (event) => {
   
     if (evt.target.readyState == FileReader.DONE) {
       const hash = CryptoJS.SHA256(fileReader.result);
-      console.log(hash.toString());
+
     }
     
   });

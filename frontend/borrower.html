@@ -24,6 +24,8 @@
       href="https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.6.1-rc.2/web3.min.js" integrity="sha512-KURAVUCRxZKDemghhiNqTnYzVPUtO3GYznBZRWRBT2GJJ5PmePAxfO7QMGCM8xUJ0QfrUYJDrtRJM4L4NOtfow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </head>
 
   <body>
@@ -45,7 +47,7 @@
               <h4>Please enter the details to seek loan</h4>
               <div class="form-group">
                 <div class="form-group">
-                  <p class="nav-item ml-auto">Account no.</p>
+                  <p class="nav-item ml-auto">Account Address</p>
                 </div>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
@@ -56,7 +58,7 @@
 
                   <input
                     type="text"
-                    class="form-control"
+                    class="form-control address"
                     placeholder="Account No."
                     aria-label="Account No."
                     aria-describedby="basic-addon1"
@@ -75,7 +77,7 @@
                   </div>
                   <input
                     type="text"
-                    class="form-control"
+                    class="form-control amount"
                     placeholder="Loan Amount"
                     aria-label="Loan Amount"
                     aria-describedby="basic-addon1"
@@ -94,7 +96,7 @@
                   </div>
                   <input
                     type="date"
-                    class="form-control"
+                    class="form-control date"
                     placeholder="Loan Amount"
                     aria-label="Loan Amount"
                     aria-describedby="basic-addon1"
@@ -113,7 +115,8 @@
                   </div>
                   <input
                     type="file"
-                    class="form-control"
+                    onchange="App.fileChange(event)" 
+                    class="form-control file"
                     placeholder="Loan Amount"
                     aria-label="Loan Amount"
                     aria-describedby="basic-addon1"
@@ -121,7 +124,7 @@
                 </div>
               </div>
               <br />
-              <div class="btn btn-primary btn-lg btn-block">
+              <div class="btn btn-primary btn-lg btn-block" id="submit">
                 <i class="fas fa-search-dollar"></i> Submit Loan Proposal
               </div>
             </form>
@@ -153,36 +156,12 @@
                 <a href="#" class="btn btn__active">Get Details</a>
               </td>
             </tr>
-            <tr>
-              <td data-label="Lender Address">
-                0x2187c0284267aB64751E49F04B817e5c5ddab9dF
-              </td>
-              <td data-label="Amount">20,000</td>
-              <td data-label="Interest">15%</td>
-              <td data-label="">
-                <a href="#" class="btn btn__active">Get Loan</a>
-              </td>
-              <td data-label="">
-                <a href="#" class="btn btn__active">Get Details</a>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Lender Address">
-                0x2187c0284267aB64751E49F04B817e5c5ddab9dF
-              </td>
-              <td data-label="Amount">20,000</td>
-              <td data-label="Interest">15%</td>
-              <td data-label="">
-                <a href="#" class="btn btn__active">Get Loan</a>
-              </td>
-              <td data-label="">
-                <a href="#" class="btn btn__active">Get Details</a>
-              </td>
-            </tr>
           </tbody>
         </table>
       </div>
     </div>
+    <script src="./config.js"></script>
+    <script src="./app.js"></script>
     <script src="index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
   </body>

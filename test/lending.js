@@ -11,29 +11,37 @@ contract('Lending', async ([owner, alice, bob]) => {
   it("should repay the amount to lender", async () => {
     try {
       const log = await contractInstance.createProposal(
-        100,
-        1000000000000000,
+        100000,
+        1605089347,
         "0x6162636400000000000000000000000000000000000000000000000000000000",
         {from: alice}        
       );
       const value = await contractInstance.proposals(0);
       const firstTime = await contractInstance.acceptProposal(
-        100,
+        100000,
         2,
         0,
         {from: bob}
       );
       const potential = (await contractInstance.potential_lenders(0));
+      await contractInstance.sendETHtoContract({from:bob, value:100000});
+       
       const borrow = await contractInstance.acceptLender(
         0,
         0,
         {from: alice,
-          gasPrice: 8000000000,
-         gas: 4700000}
+         }
       );
-      
-      const valueF = (await contractInstance.proposals(0));
 
+      await contractInstance.sendETHtoContract({from:alice, value:200000});
+      const repay = await contractInstance.repayLoan(
+        0,
+        bob,
+        {from: alice,
+        value: 200000}
+      );
+      const check = (await contractInstance.loans(0)).state;
+      assert.equal(check, 0);
     }
     catch(err)
     {
@@ -55,14 +63,5 @@ contract('Lending', async ([owner, alice, bob]) => {
     const borrower = await contractInstance.proposalToBorrower(0);
     assert.equal(borrower, alice);
     
-  })
-
-  it("should accept the lender", async () => {
-    await contractInstance.createProposal(100, 50, "0x6162636400000000000000000000000000000000000000000000000000000000", {from:alice});
-    await contractInstance.acceptProposal(100, 5, 0, {from: bob});
-    await contractInstance.acceptLender(0, 0, {from: alice, gasPrice: 8000000000, gas: 4700000});
-    
-    const loan = await contractInstance.loans(1);
-    assert.equal(loan.lender, bob);
   })
 });

@@ -47,7 +47,6 @@ contract Lending {
 
     mapping(uint256 => address) public proposalToBorrower;
     mapping(uint256 => address) public loanToLender;
-
     function createProposal(
         uint256 _loanAmount,
         uint256 _time,
@@ -84,10 +83,13 @@ contract Lending {
                 LoanState.WAITING
             )
         );
-
         loanToLender[_loanId] = msg.sender;
-
         proposals[_proposalId].state = ProposalState.ACCEPTING;
+    }
+
+    function sendETHtoContract() public payable {
+        //msg.value is the amount of wei that the msg.sender sent with this transaction.
+        //If the transaction doesn't fail, then the contract now has this ETH.
     }
 
     function getAllPotentialLenders() public view returns (Loan[] memory) {
@@ -108,54 +110,19 @@ contract Lending {
         );
 
         proposals[_proposalId].state = ProposalState.ACCEPTED;
-
-        (bool success, ) = msg.sender.call.value(
-            potential_lenders[_loanId].loanAmount
-        )("");
-        require(success, "Transfer failed.");
+        
+         (bool success, ) = msg.sender.call.value(potential_lenders[_loanId].loanAmount)("");
+         require(success, "Transfer failed.");
+        
     }
 
-    function repayAmount(uint256 _loanId) public view returns (uint256) {
-        if (loans[_loanId].state == LoanState.ACCEPTED) {
-            uint256 startTime = loans[_loanId].time;
-            uint256 finalAmount = 0;
-            uint256 principalValue = loans[_loanId].loanAmount;
-            uint256 paymentTime = block.timestamp;
-            uint256 interestRate = loans[_loanId].interestRate;
-            uint256 loanTime = paymentTime - startTime;
+    function repayLoan(uint256 _loanId, address to) public payable {
 
-            uint256 interest = (
-                principalValue.mul(interestRate).mul(loanTime)
-            ) / (365 * 24 * 60 * 60 * 100);
-
-            finalAmount.add(interest);
-            finalAmount.add(principalValue);
-
-            return finalAmount;
-        }
-    }
-
-    function repayLoan(uint256 _loanId) public payable {
-        uint256 pendingAmount = repayAmount(_loanId);
-        uint256 paid = msg.value;
-
-        if (paid >= pendingAmount) {
-            uint256 remainingValue = paid - pendingAmount;
-
-            (bool success, ) = msg.sender.call.value(pendingAmount)("");
-            require(success, "Transfer failed.");
-
-            (bool done, ) = loans[_loanId].lender.call.value(remainingValue)(
-                ""
-            );
-            require(done, "Transfer failed.");
-
-            loans[_loanId].state = LoanState.REPAID;
-        } else {
-            (bool success, ) = msg.sender.call.value(paid)("");
+             uint256 paid = msg.value;
+         
+            (bool success, ) = to.call.value(paid)("");
             require(success, "Transfer failed.");
 
             loans[_loanId].state = LoanState.REPAID;
-        }
     }
 }
