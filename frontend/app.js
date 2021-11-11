@@ -36,15 +36,42 @@ App = {
     },
 
     loadAccount: async () => {
-      App.account = (await web3.eth.getAccounts)[0];
+      App.account = (await web3.eth.getAccounts())[0];
+      console.log(App.account);
     },
 
     loadContract: async () => {
       App.contract = new web3.eth.Contract(abi, address);
-    }
+    },
+
+    createProposal: async () => {
+      const loanAmount = document.getElementById("loanAmount").value;
+      const date = document.getElementById("date").value;
+      const values = date.split("-");
+      var datum = new Date(Date.UTC(values[0],values[1],values[2]));
+      const dueDate = (datum.getTime()/1000);
+      const currentDate = Math.round(new Date().getTime()/1000);
+      const time = dueDate - currentDate;
+      
+      const file = document.getElementById("mortgage").value;
+      const mortgage = "0x6162636400000000000000000000000000000000000000000000000000000000";
+
+      const receipt = await App.contract.methods.createProposal(loanAmount, time, mortgage).send({from: App.account});
+      console.log(receipt);
+
+      console.log(file);
+      
+    },
 
 }
 
 $(document).ready(() => {
     App.load()
 })
+
+const submit = document.getElementById("submit");
+submit.addEventListener("click", (e) => {
+  e.preventDefault();
+  App.createProposal();
+})
+
