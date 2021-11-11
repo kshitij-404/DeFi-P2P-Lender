@@ -108,55 +108,54 @@ contract Lending {
         );
 
         proposals[_proposalId].state = ProposalState.ACCEPTED;
+
+        (bool success, ) = msg.sender.call.value(
+            potential_lenders[_loanId].loanAmount
+        )("");
+        require(success, "Transfer failed.");
     }
 
-    function repayAmount(uint256 _loanId) public view returns(uint) {
-      if(loans[_loanId].state == LoanState.ACCEPTED)
-      {
-          uint startTime = loans[_loanId].time;
-          uint finalAmount = 0;
-          uint principalValue = loans[_loanId].loanAmount;
-          uint paymentTime = block.timestamp;
-          uint interestRate = loans[_loanId].interestRate;
-          uint loanTime = paymentTime-startTime;
+    function repayAmount(uint256 _loanId) public view returns (uint256) {
+        if (loans[_loanId].state == LoanState.ACCEPTED) {
+            uint256 startTime = loans[_loanId].time;
+            uint256 finalAmount = 0;
+            uint256 principalValue = loans[_loanId].loanAmount;
+            uint256 paymentTime = block.timestamp;
+            uint256 interestRate = loans[_loanId].interestRate;
+            uint256 loanTime = paymentTime - startTime;
 
-          uint interest = (principalValue.mul(interestRate).mul(loanTime))/(365*24*60*60*100);
+            uint256 interest = (
+                principalValue.mul(interestRate).mul(loanTime)
+            ) / (365 * 24 * 60 * 60 * 100);
 
-          finalAmount.add(interest);
-          finalAmount.add(principalValue);
+            finalAmount.add(interest);
+            finalAmount.add(principalValue);
 
-          return finalAmount;
-      }
+            return finalAmount;
+        }
     }
 
     function repayLoan(uint256 _loanId) public payable {
-        uint pendingAmount = repayAmount(_loanId);
-        uint paid = msg.value;
+        uint256 pendingAmount = repayAmount(_loanId);
+        uint256 paid = msg.value;
 
-        if(paid >= pendingAmount)
-        {
-        uint remainingValue = paid - pendingAmount;
+        if (paid >= pendingAmount) {
+            uint256 remainingValue = paid - pendingAmount;
 
-        (bool success, ) = msg.sender.call.value(
-        pendingAmount
-        )("");
-        require(success, "Transfer failed.");
+            (bool success, ) = msg.sender.call.value(pendingAmount)("");
+            require(success, "Transfer failed.");
 
-        (bool done, ) = loans[_loanId].lender.call.value(
-        remainingValue
-        )("");
-        require(done, "Transfer failed.");
+            (bool done, ) = loans[_loanId].lender.call.value(remainingValue)(
+                ""
+            );
+            require(done, "Transfer failed.");
 
-        loans[_loanId].state = LoanState.REPAID;
-        }
-        else
-        {
-        (bool success, ) = msg.sender.call.value(
-        paid
-        )("");
-        require(success, "Transfer failed.");
-        
-        loans[_loanId].state = LoanState.REPAID;
+            loans[_loanId].state = LoanState.REPAID;
+        } else {
+            (bool success, ) = msg.sender.call.value(paid)("");
+            require(success, "Transfer failed.");
+
+            loans[_loanId].state = LoanState.REPAID;
         }
     }
 }
