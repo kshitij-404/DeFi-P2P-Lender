@@ -44,7 +44,8 @@ App = {
       }
     },  
     loadAccount: async () => {
-      App.account = (await web3.eth.getAccounts())[1];
+      App.account = (await web3.eth.getAccounts())[0];
+      console.log(App.account);
     },
   
     loadContract: async () => {
@@ -56,6 +57,8 @@ App = {
     loadProposals: async () => {
         const proposals = await App.contract.methods.getAllProposals().call();
         const table = document.getElementsByClassName("table");
+
+        console.log(proposals);
         
 
         proposals.forEach(proposal => {
