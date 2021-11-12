@@ -23,6 +23,7 @@ contract Lending {
     // borrower
 
     struct Proposal {
+        uint256 proposalId;
         address borrower;
         uint256 amount;
         uint256 time;
@@ -53,8 +54,10 @@ contract Lending {
         bytes32 _mortgage
     ) public {
         //change loanAmount to amount?
+        uint256 _proposalId = proposals.length;
         proposals.push(
             Proposal(
+                _proposalId,
                 msg.sender,
                 _loanAmount,
                 _time,
@@ -62,7 +65,7 @@ contract Lending {
                 ProposalState.WAITING
             )
         );
-        uint256 _proposalId = proposals.length - 1;
+        
         proposalToBorrower[_proposalId] = msg.sender;
     }
 
@@ -91,6 +94,10 @@ contract Lending {
 
     function getAllPotentialLenders() public view returns (Loan[] memory) {
         return potential_lenders;
+    }
+
+    function getAllProposals() public view returns (Proposal[] memory) {
+        return proposals;
     }
 
     function acceptLender(uint256 _loanId, uint256 _proposalId) public payable {

@@ -1,17 +1,9 @@
-const ProposalState = {
-  0: "ACCEPTED",
-  1: "ACCEPTING",
-  2: "WAITING",
-};
-
 App = {
-  crypt: "",
-
   load: async () => {
     await App.loadWeb3();
     await App.loadAccount();
     await App.loadContract();
-    await App.loadProposals();
+    await App.submitbtn();
   },
 
   loadWeb3: async () => {
@@ -44,35 +36,30 @@ App = {
     }
   },
   loadAccount: async () => {
-    App.account = (await web3.eth.getAccounts())[1];
+    App.account = (await web3.eth.getAccounts())[0];
   },
 
   loadContract: async () => {
     App.contract = new web3.eth.Contract(abi, address);
   },
 
-  loadProposals: async () => {
-    const proposals = await App.contract.methods.getAllProposals().call();
-    const table = document.getElementsByClassName("table");
+  giveLoan: async () => {
+    let searchParams = new URLSearchParams(window.location.search);
+    let param = searchParams.get("borrower");
 
-    proposals.forEach((proposal) => {
-      var proposalId = proposal.proposalId;
-      var date = new Date(proposal.time * 1000);
+    const amount = $("#loanAmnt").val();
+    const interest = $("#intrst").val();
+    const proposalID = param;
 
-      var dueDate =
-        date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+    const acceptedProposal = await App.contract.methods
+      .acceptProposal(amount, interest, proposalID)
+      .send({ from: App.account });
+  },
 
-      $(".table").append(` <tr>
-            <td data-label="Borrower Address">
-              ${proposal.borrower}
-            </td>
-            <td data-label="Amount">${proposal.amount}</td>
-            <td data-label="Due Date">${dueDate}</td>
-            <td data-label="">
-              <a href="./giveLoan.html?borrower=${proposalId}" class="btn btn__active">Give Loan</a>
-            </td>
-            <td data-label="Status">${ProposalState[proposal.state]}</td>
-          </tr>`);
+  submitbtn: async () => {
+    $("#submit").on("click", (e) => {
+      e.preventDefault();
+      App.giveLoan();
     });
   },
 };
