@@ -66,8 +66,8 @@ contract Lending {
         proposalToBorrower[_proposalId] = msg.sender;
     }
 
-    function getAllPotentialLenders() public view returns (Loan[] memory) {
-        return potential_lenders;
+    function getAllProposals() public view returns (Proposal[] memory) {
+        return proposals;
     }
 
     function acceptProposal(
