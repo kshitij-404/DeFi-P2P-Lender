@@ -1,4 +1,4 @@
-const address = "0x78bC99eDe31dE8506536053554aE9506e86AC6c8";
+const address = "0xdC4Fe710A4333C516F7F364FE9E7161F05BED347";
 
 const abi = [
   {
@@ -350,6 +350,58 @@ const abi = [
     "type": "function"
   },
   {
+    "constant": true,
+    "inputs": [],
+    "name": "getAllLoans",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "loanId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "lender",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "loanAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "interestRate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "proposalId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "time",
+            "type": "uint256"
+          },
+          {
+            "internalType": "enum Lending.LoanState",
+            "name": "state",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct Lending.Loan[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "constant": false,
     "inputs": [
       {
@@ -385,3 +437,4 @@ const abi = [
     "type": "function"
   }
 ];
+

@@ -61,9 +61,8 @@ App = {
       var date = new Date(proposal.time * 1000);
       var dueDate =
         date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
-      if ((proposal.proposalId = App.param)) {
+      if ((proposal.proposalId === App.param)) {
         let pdf = App.URL + proposal.mortgage;
-        console.log(proposal);
         $(".v").html(`
             <div class="form-group">
                 <div class="form-group">
@@ -93,7 +92,7 @@ App = {
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">
-                      <i class="fas fa-dollar"></i>
+                    <i class="fab fa-ethereum"></i>
                     </span>
                   </div>
                   <input
@@ -130,6 +129,13 @@ App = {
               </div>
               <a href="" id="url" target="myIframe"></a>
               <iframe id="pdfRenderer" width="100%" height="400px" name="myIframe"></iframe>
+              <br />
+              <a href="./giveLoan.html?borrower=${proposal.proposalId}">
+              <div class="btn btn-success btn-lg btn-block" >
+                <i class="fas fa-hand-holding-usd"></i> Give Loan
+              </div>
+              </a>
+            </form>
             `);
         $("#url").attr("href", pdf).click();
         document.getElementById("pdfRenderer").src = pdf;
