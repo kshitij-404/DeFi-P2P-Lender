@@ -96,6 +96,11 @@ contract Lending {
         return potential_lenders;
     }
 
+
+    function getAllProposals() public view returns (Proposal[] memory) {
+        return proposals;
+    }
+
     function acceptLender(uint256 _loanId, uint256 _proposalId) public payable {
         loans.push(
             Loan(
@@ -114,12 +119,6 @@ contract Lending {
          (bool success, ) = msg.sender.call.value(potential_lenders[_loanId].loanAmount)("");
          require(success, "Transfer failed.");
         
-    }
-
-<<<<<<< HEAD
-    function sendETHtoContract() public payable {
-        //msg.value is the amount of wei that the msg.sender sent with this transaction.
-        //If the transaction doesn't fail, then the contract now has this ETH.
     }
 
     // function repayAmount(uint256 _loanId) public view returns (uint256) {
@@ -147,15 +146,5 @@ contract Lending {
         require(success, "Transfer failed.");
 
         loans[_loanId].state = LoanState.REPAID;
-=======
-    function repayLoan(uint256 _loanId, address to) public payable {
-
-             uint256 paid = msg.value;
-         
-            (bool success, ) = to.call.value(paid)("");
-            require(success, "Transfer failed.");
-
-            loans[_loanId].state = LoanState.REPAID;
->>>>>>> 9295e2ec525ff2f9b221184109374a8e1669e388
     }
 }

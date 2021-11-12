@@ -1,5 +1,4 @@
 fileChange = (event) => {
-<<<<<<< HEAD
     var file = event.target.files[0];
   
     const fileReader = new FileReader();
@@ -14,19 +13,3 @@ fileChange = (event) => {
     });
     fileReader.readAsDataURL(file);
   }
-=======
-  var file = event.target.files[0];
-
-  const fileReader = new FileReader();
-  
-  fileReader.addEventListener('loadend', (evt) => {
-  
-    if (evt.target.readyState == FileReader.DONE) {
-      const hash = CryptoJS.SHA256(fileReader.result);
-
-    }
-    
-  });
-  fileReader.readAsDataURL(file);
-}
->>>>>>> 9295e2ec525ff2f9b221184109374a8e1669e388
