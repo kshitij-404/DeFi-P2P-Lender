@@ -7,6 +7,7 @@ App = {
     await App.loadContract();
     // await App.loadIPFS();
     await App.render();
+    await App.loadLenders();
   },
 
   loadWeb3: async () => {
@@ -106,6 +107,20 @@ App = {
       
     });
     fileReader.readAsDataURL(file);
+  },
+
+  loadLenders : async () => {
+   const all_potential_lenders = await App.contract.methods.getAllPotentialLenders().call();
+
+   console.log(all_potential_lenders);
+   console.log(App.account);
+
+   const potential_lenders = all_potential_lenders.filter(lender => proposalToBorrower[lender.proposalId] = App.account);
+
+   potential_lenders.forEach(lender => {
+      
+   })
+
   }
 }
 
