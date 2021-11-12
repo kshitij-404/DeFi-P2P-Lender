@@ -26,7 +26,7 @@ contract Lending {
         address borrower;
         uint256 amount;
         uint256 time;
-        bytes32 mortgage;
+        string mortgage;
         ProposalState state;
     }
 
@@ -50,7 +50,7 @@ contract Lending {
     function createProposal(
         uint256 _loanAmount,
         uint256 _time,
-        bytes32 _mortgage
+        string memory _mortgage
     ) public {
         //change loanAmount to amount?
         proposals.push(
@@ -64,10 +64,6 @@ contract Lending {
         );
         uint256 _proposalId = proposals.length - 1;
         proposalToBorrower[_proposalId] = msg.sender;
-    }
-
-    function getAllProposals() public view returns (Proposal[] memory) {
-        return proposals;
     }
 
     function acceptProposal(
