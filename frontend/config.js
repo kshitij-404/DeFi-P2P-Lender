@@ -1,4 +1,4 @@
-const address = "0xB738C35549Dd245cABaC5F7423537D8A2C9512Ba";
+const address = "0xf24F65C3B4b205Dcc658aE2C48e44C26a36B6303";
 
 const abi = [
   {
@@ -177,9 +177,9 @@ const abi = [
         type: "uint256",
       },
       {
-        internalType: "bytes32",
+        internalType: "string",
         name: "mortgage",
-        type: "bytes32",
+        type: "string",
       },
       {
         internalType: "enum Lending.ProposalState",
@@ -205,9 +205,9 @@ const abi = [
         type: "uint256",
       },
       {
-        internalType: "bytes32",
+        internalType: "string",
         name: "_mortgage",
-        type: "bytes32",
+        type: "string",
       },
     ],
     name: "createProposal",
@@ -239,6 +239,15 @@ const abi = [
     outputs: [],
     payable: false,
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    constant: false,
+    inputs: [],
+    name: "sendETHtoContract",
+    outputs: [],
+    payable: true,
+    stateMutability: "payable",
     type: "function",
   },
   {
@@ -321,9 +330,9 @@ const abi = [
             type: "uint256",
           },
           {
-            internalType: "bytes32",
+            internalType: "string",
             name: "mortgage",
-            type: "bytes32",
+            type: "string",
           },
           {
             internalType: "enum Lending.ProposalState",
@@ -355,15 +364,6 @@ const abi = [
       },
     ],
     name: "acceptLender",
-    outputs: [],
-    payable: true,
-    stateMutability: "payable",
-    type: "function",
-  },
-  {
-    constant: false,
-    inputs: [],
-    name: "sendETHtoContract",
     outputs: [],
     payable: true,
     stateMutability: "payable",

@@ -1,10 +1,11 @@
+// SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 pragma experimental ABIEncoderV2;
 
 import "./SafeMath.sol";
 
 contract Lending {
-    using SafeMath for uint256;
+    using SafeMath for uint;
     using SafeMath for uint256;
 
     enum ProposalState {
@@ -27,7 +28,7 @@ contract Lending {
         address borrower;
         uint256 amount;
         uint256 time;
-        bytes32 mortgage;
+        string mortgage;
         ProposalState state;
     }
 
@@ -47,11 +48,10 @@ contract Lending {
 
     mapping(uint256 => address) public proposalToBorrower;
     mapping(uint256 => address) public loanToLender;
-
     function createProposal(
         uint256 _loanAmount,
         uint256 _time,
-        bytes32 _mortgage
+        string memory _mortgage
     ) public {
         //change loanAmount to amount?
         uint256 _proposalId = proposals.length;
@@ -86,10 +86,13 @@ contract Lending {
                 LoanState.WAITING
             )
         );
-
         loanToLender[_loanId] = msg.sender;
-
         proposals[_proposalId].state = ProposalState.ACCEPTING;
+    }
+
+    function sendETHtoContract() public payable {
+        //msg.value is the amount of wei that the msg.sender sent with this transaction.
+        //If the transaction doesn't fail, then the contract now has this ETH.
     }
 
     function getAllPotentialLenders() public view returns (Loan[] memory) {
@@ -114,16 +117,10 @@ contract Lending {
         );
 
         proposals[_proposalId].state = ProposalState.ACCEPTED;
-
-        (bool success, ) = msg.sender.call.value(
-            potential_lenders[_loanId].loanAmount
-        )("");
-        require(success, "Transfer failed.");
-    }
-
-    function sendETHtoContract() public payable {
-        //msg.value is the amount of wei that the msg.sender sent with this transaction.
-        //If the transaction doesn't fail, then the contract now has this ETH.
+        
+         (bool success, ) = msg.sender.call.value(potential_lenders[_loanId].loanAmount)("");
+         require(success, "Transfer failed.");
+        
     }
 
     // function repayAmount(uint256 _loanId) public view returns (uint256) {
