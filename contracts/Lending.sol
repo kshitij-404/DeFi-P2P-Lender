@@ -1,10 +1,11 @@
+// SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 pragma experimental ABIEncoderV2;
 
 import "./SafeMath.sol";
 
 contract Lending {
-    using SafeMath for uint256;
+    using SafeMath for uint;
     using SafeMath for uint256;
 
     enum ProposalState {
@@ -46,7 +47,6 @@ contract Lending {
 
     mapping(uint256 => address) public proposalToBorrower;
     mapping(uint256 => address) public loanToLender;
-
     function createProposal(
         uint256 _loanAmount,
         uint256 _time,
@@ -83,10 +83,13 @@ contract Lending {
                 LoanState.WAITING
             )
         );
-
         loanToLender[_loanId] = msg.sender;
-
         proposals[_proposalId].state = ProposalState.ACCEPTING;
+    }
+
+    function sendETHtoContract() public payable {
+        //msg.value is the amount of wei that the msg.sender sent with this transaction.
+        //If the transaction doesn't fail, then the contract now has this ETH.
     }
 
     function getAllPotentialLenders() public view returns (Loan[] memory) {
@@ -107,13 +110,13 @@ contract Lending {
         );
 
         proposals[_proposalId].state = ProposalState.ACCEPTED;
-
-        (bool success, ) = msg.sender.call.value(
-            potential_lenders[_loanId].loanAmount
-        )("");
-        require(success, "Transfer failed.");
+        
+         (bool success, ) = msg.sender.call.value(potential_lenders[_loanId].loanAmount)("");
+         require(success, "Transfer failed.");
+        
     }
 
+<<<<<<< HEAD
     function sendETHtoContract() public payable {
         //msg.value is the amount of wei that the msg.sender sent with this transaction.
         //If the transaction doesn't fail, then the contract now has this ETH.
@@ -144,5 +147,15 @@ contract Lending {
         require(success, "Transfer failed.");
 
         loans[_loanId].state = LoanState.REPAID;
+=======
+    function repayLoan(uint256 _loanId, address to) public payable {
+
+             uint256 paid = msg.value;
+         
+            (bool success, ) = to.call.value(paid)("");
+            require(success, "Transfer failed.");
+
+            loans[_loanId].state = LoanState.REPAID;
+>>>>>>> 9295e2ec525ff2f9b221184109374a8e1669e388
     }
 }

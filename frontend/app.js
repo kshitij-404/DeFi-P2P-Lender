@@ -5,7 +5,10 @@ App = {
     await App.loadWeb3();
     await App.loadAccount();
     await App.loadContract();
+<<<<<<< HEAD
     // await App.loadIPFS();
+=======
+>>>>>>> 9295e2ec525ff2f9b221184109374a8e1669e388
     await App.render();
   },
 
@@ -25,12 +28,21 @@ App = {
       } catch (error) {
         // User denied account access...
       }
+<<<<<<< HEAD
     }
     // Legacy dapp browsers...
     else if (window.web3) {
       App.web3Provider = web3.currentProvider
       window.web3 = new Web3(web3.currentProvider)
     }
+=======
+    }
+    // Legacy dapp browsers...
+    else if (window.web3) {
+      App.web3Provider = web3.currentProvider
+      window.web3 = new Web3(web3.currentProvider)
+    }
+>>>>>>> 9295e2ec525ff2f9b221184109374a8e1669e388
     // Non-dapp browsers...
     else {
       console.log(
@@ -39,12 +51,17 @@ App = {
     }
   },  
   loadAccount: async () => {
+<<<<<<< HEAD
     App.account = (await web3.eth.getAccounts())[0];
+=======
+    App.account = (await web3.eth.getAccounts)[1];
+>>>>>>> 9295e2ec525ff2f9b221184109374a8e1669e388
   },
 
   loadContract: async () => {
     App.contract = new web3.eth.Contract(abi, address);
   },
+<<<<<<< HEAD
 
   // loadIPFS: async () => {
   //   node = await IPFS.create();
@@ -65,10 +82,23 @@ App = {
 
     console.log(amount);
 
+=======
+
+  render: async () => {
+    $("#submit").on('click', () => { App.createProposal() });
+  },
+
+  createProposal: async () => {
+    const time = new Date($(".date").val()).getTime() / 1000;
+    const mortgage = App.crypt;
+    const amount = $(".amount").val();
+
+>>>>>>> 9295e2ec525ff2f9b221184109374a8e1669e388
     const receipt = await App.contract.methods.createProposal(amount, time, mortgage).send({from: App.account});
     console.log(receipt);
   },
 
+<<<<<<< HEAD
   // readCurrentUserFile: async () => {
   //   const result = await ipfsContract.userFiles(
   //     defaultProvider.getSigner().getAddress()
@@ -91,6 +121,8 @@ App = {
   //   }
 // },
 
+=======
+>>>>>>> 9295e2ec525ff2f9b221184109374a8e1669e388
   fileChange : async (event) => {
     var file = event.target.files[0];
   
@@ -101,7 +133,10 @@ App = {
       if (evt.target.readyState == FileReader.DONE) {
         const hash = CryptoJS.SHA256(fileReader.result);
         App.crypt = hash.toString();
+<<<<<<< HEAD
         console.log(hash);
+=======
+>>>>>>> 9295e2ec525ff2f9b221184109374a8e1669e388
       }
       
     });
@@ -110,6 +145,14 @@ App = {
 }
 
 $(document).ready(() => {
+<<<<<<< HEAD
     App.load();
 
 })
+=======
+
+  App.load();
+
+})
+
+>>>>>>> 9295e2ec525ff2f9b221184109374a8e1669e388
