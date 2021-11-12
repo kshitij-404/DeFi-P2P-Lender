@@ -103,6 +103,10 @@ contract Lending {
         return proposals;
     }
 
+    function getAllLoans() public view returns (Loan[] memory) {
+        return loans;
+    }
+
     function acceptLender(uint256 _loanId, uint256 _proposalId) public payable {
         loans.push(
             Loan(

@@ -1,387 +1,439 @@
-const address = "0xf24F65C3B4b205Dcc658aE2C48e44C26a36B6303";
+const address = "0x6384fAb7a8E008793b65B7F333c16bFBaC0fb919";
 
 const abi = [
   {
-    constant: true,
-    inputs: [
+    "constant": true,
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    name: "loanToLender",
-    outputs: [
+    "name": "loanToLender",
+    "outputs": [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    constant: true,
-    inputs: [
+    "constant": true,
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    name: "loans",
-    outputs: [
+    "name": "loans",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "loanId",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "loanId",
+        "type": "uint256"
       },
       {
-        internalType: "address",
-        name: "lender",
-        type: "address",
+        "internalType": "address",
+        "name": "lender",
+        "type": "address"
       },
       {
-        internalType: "uint256",
-        name: "loanAmount",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "loanAmount",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "interestRate",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "interestRate",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "proposalId",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "proposalId",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "time",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "time",
+        "type": "uint256"
       },
       {
-        internalType: "enum Lending.LoanState",
-        name: "state",
-        type: "uint8",
-      },
+        "internalType": "enum Lending.LoanState",
+        "name": "state",
+        "type": "uint8"
+      }
     ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    constant: true,
-    inputs: [
+    "constant": true,
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    name: "potential_lenders",
-    outputs: [
+    "name": "potential_lenders",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "loanId",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "loanId",
+        "type": "uint256"
       },
       {
-        internalType: "address",
-        name: "lender",
-        type: "address",
+        "internalType": "address",
+        "name": "lender",
+        "type": "address"
       },
       {
-        internalType: "uint256",
-        name: "loanAmount",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "loanAmount",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "interestRate",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "interestRate",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "proposalId",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "proposalId",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "time",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "time",
+        "type": "uint256"
       },
       {
-        internalType: "enum Lending.LoanState",
-        name: "state",
-        type: "uint8",
-      },
+        "internalType": "enum Lending.LoanState",
+        "name": "state",
+        "type": "uint8"
+      }
     ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    constant: true,
-    inputs: [
+    "constant": true,
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    name: "proposalToBorrower",
-    outputs: [
+    "name": "proposalToBorrower",
+    "outputs": [
       {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    constant: true,
-    inputs: [
+    "constant": true,
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    name: "proposals",
-    outputs: [
+    "name": "proposals",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "proposalId",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "proposalId",
+        "type": "uint256"
       },
       {
-        internalType: "address",
-        name: "borrower",
-        type: "address",
+        "internalType": "address",
+        "name": "borrower",
+        "type": "address"
       },
       {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "time",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "time",
+        "type": "uint256"
       },
       {
-        internalType: "string",
-        name: "mortgage",
-        type: "string",
+        "internalType": "string",
+        "name": "mortgage",
+        "type": "string"
       },
       {
-        internalType: "enum Lending.ProposalState",
-        name: "state",
-        type: "uint8",
-      },
+        "internalType": "enum Lending.ProposalState",
+        "name": "state",
+        "type": "uint8"
+      }
     ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    constant: false,
-    inputs: [
+    "constant": false,
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "_loanAmount",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "_loanAmount",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "_time",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "_time",
+        "type": "uint256"
       },
       {
-        internalType: "string",
-        name: "_mortgage",
-        type: "string",
-      },
+        "internalType": "string",
+        "name": "_mortgage",
+        "type": "string"
+      }
     ],
-    name: "createProposal",
-    outputs: [],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "createProposal",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    constant: false,
-    inputs: [
+    "constant": false,
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "_loanAmount",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "_loanAmount",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "_interestRate",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "_interestRate",
+        "type": "uint256"
       },
       {
-        internalType: "uint256",
-        name: "_proposalId",
-        type: "uint256",
-      },
+        "internalType": "uint256",
+        "name": "_proposalId",
+        "type": "uint256"
+      }
     ],
-    name: "acceptProposal",
-    outputs: [],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
+    "name": "acceptProposal",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    constant: false,
-    inputs: [],
-    name: "sendETHtoContract",
-    outputs: [],
-    payable: true,
-    stateMutability: "payable",
-    type: "function",
+    "constant": false,
+    "inputs": [],
+    "name": "sendETHtoContract",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
   },
   {
-    constant: true,
-    inputs: [],
-    name: "getAllPotentialLenders",
-    outputs: [
+    "constant": true,
+    "inputs": [],
+    "name": "getAllPotentialLenders",
+    "outputs": [
       {
-        components: [
+        "components": [
           {
-            internalType: "uint256",
-            name: "loanId",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "loanId",
+            "type": "uint256"
           },
           {
-            internalType: "address",
-            name: "lender",
-            type: "address",
+            "internalType": "address",
+            "name": "lender",
+            "type": "address"
           },
           {
-            internalType: "uint256",
-            name: "loanAmount",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "loanAmount",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "interestRate",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "interestRate",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "proposalId",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "proposalId",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "time",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "time",
+            "type": "uint256"
           },
           {
-            internalType: "enum Lending.LoanState",
-            name: "state",
-            type: "uint8",
-          },
+            "internalType": "enum Lending.LoanState",
+            "name": "state",
+            "type": "uint8"
+          }
         ],
-        internalType: "struct Lending.Loan[]",
-        name: "",
-        type: "tuple[]",
-      },
+        "internalType": "struct Lending.Loan[]",
+        "name": "",
+        "type": "tuple[]"
+      }
     ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    constant: true,
-    inputs: [],
-    name: "getAllProposals",
-    outputs: [
+    "constant": true,
+    "inputs": [],
+    "name": "getAllProposals",
+    "outputs": [
       {
-        components: [
+        "components": [
           {
-            internalType: "uint256",
-            name: "proposalId",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "proposalId",
+            "type": "uint256"
           },
           {
-            internalType: "address",
-            name: "borrower",
-            type: "address",
+            "internalType": "address",
+            "name": "borrower",
+            "type": "address"
           },
           {
-            internalType: "uint256",
-            name: "amount",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
           },
           {
-            internalType: "uint256",
-            name: "time",
-            type: "uint256",
+            "internalType": "uint256",
+            "name": "time",
+            "type": "uint256"
           },
           {
-            internalType: "string",
-            name: "mortgage",
-            type: "string",
+            "internalType": "string",
+            "name": "mortgage",
+            "type": "string"
           },
           {
-            internalType: "enum Lending.ProposalState",
-            name: "state",
-            type: "uint8",
-          },
+            "internalType": "enum Lending.ProposalState",
+            "name": "state",
+            "type": "uint8"
+          }
         ],
-        internalType: "struct Lending.Proposal[]",
-        name: "",
-        type: "tuple[]",
-      },
+        "internalType": "struct Lending.Proposal[]",
+        "name": "",
+        "type": "tuple[]"
+      }
     ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    constant: false,
-    inputs: [
+    "constant": true,
+    "inputs": [],
+    "name": "getAllLoans",
+    "outputs": [
       {
-        internalType: "uint256",
-        name: "_loanId",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "_proposalId",
-        type: "uint256",
-      },
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "loanId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "lender",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "loanAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "interestRate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "proposalId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "time",
+            "type": "uint256"
+          },
+          {
+            "internalType": "enum Lending.LoanState",
+            "name": "state",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct Lending.Loan[]",
+        "name": "",
+        "type": "tuple[]"
+      }
     ],
-    name: "acceptLender",
-    outputs: [],
-    payable: true,
-    stateMutability: "payable",
-    type: "function",
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    constant: false,
-    inputs: [
+    "constant": false,
+    "inputs": [
       {
-        internalType: "uint256",
-        name: "_loanId",
-        type: "uint256",
+        "internalType": "uint256",
+        "name": "_loanId",
+        "type": "uint256"
       },
+      {
+        "internalType": "uint256",
+        "name": "_proposalId",
+        "type": "uint256"
+      }
     ],
-    name: "repayLoan",
-    outputs: [],
-    payable: true,
-    stateMutability: "payable",
-    type: "function",
+    "name": "acceptLender",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
   },
-];
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_loanId",
+        "type": "uint256"
+      }
+    ],
+    "name": "repayLoan",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  }
+]

@@ -37,6 +37,7 @@ App = {
   },
   loadAccount: async () => {
     App.account = (await web3.eth.getAccounts())[0];
+    $(".acc").attr("placeholder", App.account);
   },
 
   loadContract: async () => {

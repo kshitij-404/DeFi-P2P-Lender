@@ -54,7 +54,7 @@ App = {
     const time = new Date($(".date").val()).getTime() / 1000;
     const mortgage = $("#mortgage").val();
     const amount = $(".amount").val();
-    const receipt = await App.contract.methods.createProposal(amount, time, mortgage).send({from: App.account});
+    await App.contract.methods.createProposal(amount, time, mortgage).send({from: App.account});
   },
 
 }

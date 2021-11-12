@@ -70,8 +70,10 @@ App = {
           <td data-label="Due Date">${dueDate}</td>
           <td data-label="">
             <a href="./giveLoan.html?borrower=${proposalId}" class="btn btn__active">Give Loan</a>
-            <a href="./verify.html?a=${proposalId}" class="btn btn__active">Get Details</a>
           </td>
+           <td>
+            <a href="./verify.html?a=${proposalId}" class="btn btn__active">Get Details</a>
+            </td>
           <td data-label="Status">${ProposalState[proposal.state]}</td>
         </tr>`);
     });
