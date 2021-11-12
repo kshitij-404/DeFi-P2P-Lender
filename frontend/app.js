@@ -5,7 +5,6 @@ App = {
     await App.loadWeb3();
     await App.loadAccount();
     await App.loadContract();
-    // await App.loadIPFS();
     await App.render();
     await App.loadLenders();
   },
@@ -41,90 +40,53 @@ App = {
   },  
   loadAccount: async () => {
     App.account = (await web3.eth.getAccounts())[0];
+    $("#acc").attr("placeholder", App.account);
   },
 
   loadContract: async () => {
     App.contract = new web3.eth.Contract(abi, address);
   },
 
-  // loadIPFS: async () => {
-  //   node = await IPFS.create();
-  //   const version = await node.version();
-  //   console.log("IPFS Node Version:", version.version);
-  // },
-
   render: async () => {
-    $("#submit").on('click', (e) => { 
-      e.preventDefault();
-      App.createProposal() });
+    $("#submit").on('click', (e) => { e.preventDefault(); App.createProposal() });
   },
 
   createProposal: async () => {
     const time = new Date($(".date").val()).getTime() / 1000;
-    const mortgage = "0x6162636400000000000000000000000000000000000000000000000000000000";
+    const mortgage = $("#mortgage").val();
     const amount = $(".amount").val();
-
-    console.log(amount);
-
     const receipt = await App.contract.methods.createProposal(amount, time, mortgage).send({from: App.account});
-    console.log(receipt);
-  },
-
-  // readCurrentUserFile: async () => {
-  //   const result = await ipfsContract.userFiles(
-  //     defaultProvider.getSigner().getAddress()
-  //   );
-  
-  //   return result;
-  // },
-
-  // setFile: async (hash) => {
-  //   const ipfsWithSigner = ipfsContract.connect(defaultProvider.getSigner());
-  //   await ipfsWithSigner.setFile(hash);
-  //   setIpfsHash(hash);
-  // },
-
-  // uploadFile: async (file) => {
-  //   const files = [{ path: file.name + file.path, content: file }];
-
-  //   for await (const result of node.add(files)) {
-  //       await setFile(result.cid.string);
-  //   }
-// },
-
-  fileChange : async (event) => {
-    var file = event.target.files[0];
-  
-    const fileReader = new FileReader();
-    
-    fileReader.addEventListener('loadend', (evt) => {
-    
-      if (evt.target.readyState == FileReader.DONE) {
-        const hash = CryptoJS.SHA256(fileReader.result);
-        App.crypt = hash.toString();
-        console.log(hash);
-      }
-      
-    });
-    fileReader.readAsDataURL(file);
   },
 
   loadLenders : async () => {
-   const all_potential_lenders = await App.contract.methods.getAllPotentialLenders().call();
+    const all_potential_lenders = await App.contract.methods.getAllPotentialLenders().call();
+ 
+    all_potential_lenders.forEach(async lender => {
+      const borrower = await App.contract.methods.proposalToBorrower(lender.proposalId).call();
 
-   console.log(all_potential_lenders);
-   console.log(App.account);
-
-   const potential_lenders = all_potential_lenders.filter(lender => proposalToBorrower[lender.proposalId] = App.account);
-
-   potential_lenders.forEach(lender => {
-      
-   })
+      if(borrower == App.account){
+        $(".table").append(`<tr>
+        <td data-label="Lender Address">
+          ${lender.lender}
+        </td>
+        <td data-label="Amount">${lender.loanAmount}</td>
+        <td data-label="Interest">${lender.interestRate}</td>
+        <td data-label="">
+          <a href="#" class="btn btn__active">Get Loan</a>
+        </td>
+        <td data-label="">
+          <a href="#" class="btn btn__active">Get Details</a>
+        </td>
+      </tr>`)
+      }
+    });
 
   }
 }
 
 $(document).ready(() => {
-    App.load();
+
+  App.load();
 
 })
+

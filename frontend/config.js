@@ -1,4 +1,4 @@
-const address = "0xCEaAB554BA204d25b3dbD8bbC47494A24444E326";
+const address = "0x78bC99eDe31dE8506536053554aE9506e86AC6c8";
 
 const abi = [
   {
@@ -157,6 +157,11 @@ const abi = [
     "name": "proposals",
     "outputs": [
       {
+        "internalType": "uint256",
+        "name": "proposalId",
+        "type": "uint256"
+      },
+      {
         "internalType": "address",
         "name": "borrower",
         "type": "address"
@@ -172,9 +177,9 @@ const abi = [
         "type": "uint256"
       },
       {
-        "internalType": "bytes32",
+        "internalType": "string",
         "name": "mortgage",
-        "type": "bytes32"
+        "type": "string"
       },
       {
         "internalType": "enum Lending.ProposalState",
@@ -200,57 +205,15 @@ const abi = [
         "type": "uint256"
       },
       {
-        "internalType": "bytes32",
+        "internalType": "string",
         "name": "_mortgage",
-        "type": "bytes32"
+        "type": "string"
       }
     ],
     "name": "createProposal",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getAllProposals",
-    "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "borrower",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "amount",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "time",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bytes32",
-            "name": "mortgage",
-            "type": "bytes32"
-          },
-          {
-            "internalType": "enum Lending.ProposalState",
-            "name": "state",
-            "type": "uint8"
-          }
-        ],
-        "internalType": "struct Lending.Proposal[]",
-        "name": "",
-        "type": "tuple[]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -276,6 +239,15 @@ const abi = [
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "sendETHtoContract",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -331,6 +303,53 @@ const abi = [
     "type": "function"
   },
   {
+    "constant": true,
+    "inputs": [],
+    "name": "getAllProposals",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "proposalId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "borrower",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "time",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "mortgage",
+            "type": "string"
+          },
+          {
+            "internalType": "enum Lending.ProposalState",
+            "name": "state",
+            "type": "uint8"
+          }
+        ],
+        "internalType": "struct Lending.Proposal[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "constant": false,
     "inputs": [
       {
@@ -352,15 +371,6 @@ const abi = [
   },
   {
     "constant": false,
-    "inputs": [],
-    "name": "sendETHtoContract",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
     "inputs": [
       {
         "internalType": "uint256",
@@ -374,4 +384,4 @@ const abi = [
     "stateMutability": "payable",
     "type": "function"
   }
-]
+];
