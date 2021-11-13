@@ -1,0 +1,91 @@
+.container-fluid {
+  min-height: 100vh;
+  max-height: 100vh;
+}
+
+.bg-login {
+  background: url("https://images.pexels.com/photos/2603464/pexels-photo-2603464.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260")
+    no-repeat center;
+  background-size: cover;
+  height: 100vh;
+}
+
+h1 {
+  font-size: 50px !important;
+  background: rgba(0, 0, 0, 0.8);
+  display: inline-block;
+}
+
+h3 {
+  color: #edd;
+  font-size: 40px;
+  background: rgba(0, 0, 0, 0.8);
+  display: inline-block;
+}
+
+h4 {
+  font-family: "Raleway", sans-serif;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.login-area {
+  background-color: #fff;
+  height: 100vh;
+}
+
+.input-group-text i {
+  font-size: 13px !important;
+  color: #777;
+  text-align: center;
+}
+
+.input-group-text {
+  width: 40px !important;
+  background-color: #f4f4f4 !important;
+}
+
+input,
+.input-group-text {
+  border: 1px solid #f0f0f0 !important;
+}
+
+button {
+  font-weight: 800 !important;
+}
+
+.content,
+form {
+  position: relative;
+  top: 20vh;
+  padding: 0 30px;
+}
+
+form {
+  top: 30vh;
+}
+
+.content .brand {
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: white;
+}
+
+@media (min-width: 300px) and (max-width: 12000px) {
+  .bg-login {
+    display: block;
+  }
+}
+
+@media (min-width: 0px) and (max-width: 300px) {
+  .bg-login {
+    display: none;
+  }
+}

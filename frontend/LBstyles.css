@@ -1,0 +1,164 @@
+/* .container-fluid {
+  min-height: 100vh;
+  max-height: 100vh;
+} */
+
+/* .bg-login {
+  background: url("https://images.pexels.com/photos/2603464/pexels-photo-2603464.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260")
+    no-repeat center;
+  background-size: cover;
+  height: 50vh;
+} */
+
+h1 {
+  font-size: 50px !important;
+  background: rgba(0, 0, 0, 0.8);
+  /* display: inline-block; */
+}
+
+h3 {
+  color: rgb(27, 27, 27);
+  font-size: 40px;
+  /* display: inline-block; */
+}
+
+h4 {
+  font-family: "Raleway", sans-serif;
+  padding-bottom: 20px;
+}
+
+.login-area {
+  background-color: #fff;
+  /* height: 100vh; */
+}
+
+.input-group-text i {
+  font-size: 13px !important;
+  color: #777;
+  text-align: center;
+}
+
+.input-group-text {
+  width: 40px !important;
+  background-color: #f4f4f4 !important;
+}
+
+input,
+.input-group-text {
+  border: 1px solid #f0f0f0 !important;
+}
+
+button {
+  font-weight: 800 !important;
+}
+
+.content,
+form {
+  position: relative;
+  top: 5vh;
+  margin-bottom: 5vh;
+  padding: 0 30px;
+}
+
+/* form {
+  top: 30vh;
+} */
+
+.content .brand {
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+@media (min-width: 300px) and (max-width: 12000px) {
+  .bg-login {
+    display: block;
+  }
+}
+
+@media (min-width: 0px) and (max-width: 300px) {
+  .bg-login {
+    display: none;
+  }
+}
+
+.table {
+  margin-top: 5vh;
+  width: 100%;
+  border-spacing: 0;
+  text-align: left;
+}
+.table th {
+  font-weight: 300;
+  font-size: 16px;
+  color: #fff;
+  line-height: 26px;
+  padding: 18px 30px;
+}
+.table thead tr {
+  background: #2b2d32;
+}
+.table td {
+  padding: 30px 30px 31px;
+  font-weight: 300;
+  font-size: 16px;
+  color: black-2;
+  line-height: 26px;
+  text-transform: uppercase;
+}
+.table tbody tr:nth-child(odd) {
+  background: white;
+}
+.table tbody tr:nth-child(even) {
+  background: #f8fbfc;
+}
+.table__wrapper {
+  padding-top: 40px;
+}
+.btn {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 25px;
+  text-transform: uppercase;
+  width: 170px;
+  text-align: center;
+  border-radius: 3px;
+  transition: 0.3s ease;
+  text-decoration: none;
+}
+.btn:hover {
+  color: white;
+}
+.btn__active {
+  color: #4ed99c;
+  border: 2px solid #4ed99c;
+}
+.btn__active:hover {
+  background: #4ed99c;
+}
+.btn__pledged {
+  color: #f14044;
+  border: 2px solid #f14044;
+}
+.btn__pledged:hover {
+  background: #f14044;
+}
+@media (max-width: 768px) {
+  .table td {
+    display: block;
+    text-align: right;
+  }
+  .table td:before {
+    content: attr(data-label);
+    float: left;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  .table thead display none tr {
+    margin-bottom: 30px;
+    display: block;
+  }
+  .table thead {
+    display: none;
+  }
+}

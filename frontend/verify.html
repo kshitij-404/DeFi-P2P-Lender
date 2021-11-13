@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="LBstyles.css" />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.6.1-rc.2/web3.min.js" integrity="sha512-KURAVUCRxZKDemghhiNqTnYzVPUtO3GYznBZRWRBT2GJJ5PmePAxfO7QMGCM8xUJ0QfrUYJDrtRJM4L4NOtfow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <div class="d-md-flex justify-content-md-center">
+        <div class="row">
+          <!-- <div class="col-md-12 bg-login">
+            <img src="" alt="" />
+            <div class="content">
+              <h1 class="brand">Hello Borrower!</h1>
+              <br />
+              <h3>Fill in the details to submit a loan proposal!</h3>
+            </div>
+          </div> -->
+
+          <div class="col-md-12 login-area">
+            <form>
+              <h3>Hello Lender!</h3>
+              <h4>Verify the details</h4>
+              <div class="v">
+              <div class="form-group">
+                <div class="form-group">
+                  <p class="nav-item ml-auto">Account no.</p>
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                      <i class="fas fa-user"></i>
+                    </span>
+                  </div>
+                  <input
+                  type="text"
+                  class="form-control"
+                  id="id"
+                  placeholder="Account No."
+                  aria-label="Account No."
+                  aria-describedby="basic-addon1"
+                  disabled
+                />
+                </div>
+              </div>
+              <div class="form-group">
+                <p class="nav-item ml-auto">Loan Amount</p>
+              </div>
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                      <i class="fas fa-dollar"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <p class="nav-item ml-auto">Interest</p>
+              </div>
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                      <i class="fas fa-percent"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <!-- <div class="form-group">
+                <p class="nav-item ml-auto">Upload Mortgage</p>
+              </div>
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                      <i class="fas fa-file"></i>
+                    </span>
+                  </div>
+                  <input
+                    type="file"
+                    class="form-control"
+                    placeholder="Loan Amount"
+                    aria-label="Loan Amount"
+                    aria-describedby="basic-addon1"
+                  />
+                </div>
+              </div> -->
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-md-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Borrower Address</th>
+              <th>Amount</th>
+              <th>Due Date</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Borrower Address">
+                0x2187c0284267aB64751E49F04B817e5c5ddab9dF
+              </td>
+              <td data-label="Amount">20,000</td>
+              <td data-label="Due Date">15/12/2021</td>
+              <td data-label="">
+                <a href="#" class="btn btn__active">Give Loan</a>
+              </td>
+              <td data-label="">
+                <a href="#" class="btn btn__active">Show Details</a>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="Borrower Address">
+                0x2187c0284267aB64751E49F04B817e5c5ddab9dF
+              </td>
+              <td data-label="Amount">20,000</td>
+              <td data-label="Due Date">15/12/2021</td>
+              <td data-label="">
+                <a href="#" class="btn btn__active">Give Loan</a>
+              </td>
+              <td data-label="">
+                <a href="#" class="btn btn__active">Show Details</a>
+              </td>
+            </tr>
+            <tr>
+              <td data-label="Borrower Address">
+                0x2187c0284267aB64751E49F04B817e5c5ddab9dF
+              </td>
+              <td data-label="Amount">20,000</td>
+              <td data-label="Due Date">15/12/2021</td>
+              <td data-label="">
+                <a href="#" class="btn btn__active">Give Loan</a>
+              </td>
+              <td data-label="">
+                <a href="#" class="btn btn__active">Show Details</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div> -->
+    </div>
+    <script src="index.js"></script>
+    <script src="./config.js"></script>
+    <script src="./verify.js"></script>
+  </body>
+</html>
