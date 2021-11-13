@@ -5,7 +5,7 @@ pragma experimental ABIEncoderV2;
 import "./SafeMath.sol";
 
 contract Lending {
-    using SafeMath for uint;
+    using SafeMath for uint256;
     using SafeMath for uint256;
 
     enum ProposalState {
@@ -22,7 +22,6 @@ contract Lending {
     }
 
     // borrower
-
     struct Proposal {
         uint256 proposalId;
         address borrower;
@@ -30,6 +29,7 @@ contract Lending {
         uint256 time;
         string mortgage;
         ProposalState state;
+        bool sendMoney;
     }
 
     struct Loan {
@@ -48,6 +48,7 @@ contract Lending {
 
     mapping(uint256 => address) public proposalToBorrower;
     mapping(uint256 => address) public loanToLender;
+
     function createProposal(
         uint256 _loanAmount,
         uint256 _time,
@@ -62,10 +63,11 @@ contract Lending {
                 _loanAmount,
                 _time,
                 _mortgage,
-                ProposalState.WAITING
+                ProposalState.WAITING,
+                false
             )
         );
-        
+
         proposalToBorrower[_proposalId] = msg.sender;
     }
 
@@ -82,7 +84,7 @@ contract Lending {
                 _loanAmount,
                 _interestRate,
                 _proposalId,
-                0,
+                block.timestamp,
                 LoanState.WAITING
             )
         );
@@ -103,11 +105,11 @@ contract Lending {
         return proposals;
     }
 
-     function getAllLoans() public view returns (Loan[] memory) {
+    function getAllLoans() public view returns (Loan[] memory) {
         return loans;
     }
 
-    function acceptLender(uint256 _loanId, uint256 _proposalId) public payable {
+    function acceptLender(uint256 _loanId, uint256 _proposalId) public {
         loans.push(
             Loan(
                 _loanId,
@@ -121,10 +123,15 @@ contract Lending {
         );
 
         proposals[_proposalId].state = ProposalState.ACCEPTED;
-        
-         (bool success, ) = msg.sender.call.value(potential_lenders[_loanId].loanAmount)("");
-         require(success, "Transfer failed.");
-        
+
+        potential_lenders[_loanId].state = LoanState.PAID;
+
+        proposals[_proposalId].sendMoney = true;
+
+        // (bool success, ) = msg.sender.call.value(
+        //     potential_lenders[_loanId].loanAmount
+        // )("");
+        // require(success, "Transfer failed.");
     }
 
     // function repayAmount(uint256 _loanId) public view returns (uint256) {
@@ -147,10 +154,7 @@ contract Lending {
     //     }
     // }
 
-    function repayLoan(uint256 _loanId) public payable {
-        (bool success, ) = msg.sender.call.value(msg.value)("");
-        require(success, "Transfer failed.");
-
-        loans[_loanId].state = LoanState.REPAID;
+    function loanPaid(uint256 _loanId) public {
+        potential_lenders[_loanId].state = LoanState.REPAID;
     }
 }
