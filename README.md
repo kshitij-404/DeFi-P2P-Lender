@@ -1,4 +1,3 @@
-# DeFi-P2P-Lender
 [![Contributors][contributors-shield]][contributors-url]
 <!-- PROJECT LOGO -->
 <br />
@@ -8,10 +7,9 @@
   Connecting people with their money.
    <br />
   </p>
-</p>
 <br />
 <img src="https://i.ibb.co/z45CJfm/reva.png" alt="reva" border="0">
-
+</p>
 <br /><br />
 
 <!-- TABLE OF CONTENTS -->
