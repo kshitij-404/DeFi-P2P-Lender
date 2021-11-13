@@ -7,10 +7,11 @@
   Connecting people with their money.
    <br />
   </p>
-<br />
+</p>
+<p align ="center">
 <img src="https://i.ibb.co/z45CJfm/reva.png" alt="reva" border="0">
 </p>
-<br /><br />
+<br />
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
