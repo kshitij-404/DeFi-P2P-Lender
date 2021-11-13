@@ -1,6 +1,7 @@
-const address = "0xdC4Fe710A4333C516F7F364FE9E7161F05BED347";
+const address = "0xEDEb41e81a0a28d1fa0Ff1787fd273A41f575fdc";
+const address_2 = "0xc0D808dc1C81dBdC641bd8c57066F87fE74FFce5";
 
-const abi = [
+const abi =[
   {
     "constant": true,
     "inputs": [
@@ -185,6 +186,11 @@ const abi = [
         "internalType": "enum Lending.ProposalState",
         "name": "state",
         "type": "uint8"
+      },
+      {
+        "internalType": "bool",
+        "name": "sendMoney",
+        "type": "bool"
       }
     ],
     "payable": false,
@@ -338,6 +344,11 @@ const abi = [
             "internalType": "enum Lending.ProposalState",
             "name": "state",
             "type": "uint8"
+          },
+          {
+            "internalType": "bool",
+            "name": "sendMoney",
+            "type": "bool"
           }
         ],
         "internalType": "struct Lending.Proposal[]",
@@ -417,8 +428,8 @@ const abi = [
     ],
     "name": "acceptLender",
     "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
+    "payable": false,
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -430,10 +441,112 @@ const abi = [
         "type": "uint256"
       }
     ],
-    "name": "repayLoan",
+    "name": "loanPaid",
     "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_loanId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getLoanState",
+    "outputs": [
+      {
+        "internalType": "enum Lending.LoanState",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  }
+];
+
+const abi_2 = [
+  {
+    "inputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "borrower",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "borrowerToMortgage",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "name": "mortgageToBorrower",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "document",
+        "type": "string"
+      }
+    ],
+    "name": "addMortgage",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
     "type": "function"
   }
 ];
