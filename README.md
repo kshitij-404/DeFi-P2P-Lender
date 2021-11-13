@@ -20,7 +20,10 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       </li>
-    <li>
+     <li>
+         <a href="#flow">Project Design</a>
+      </li>
+      <li>
       <a href="#screenshots">Screenshots</a>
       </li>
       <li>
@@ -54,7 +57,13 @@ We propose a solution to this problem through our DApp Decentralised Financial P
 * **Fair Interest Rates :** Since blockchain is immutable, the interest rate once decided upon cannot be changed later in an unfair way. The lender gets to specify the desired interest rate beforehand and the borrower gets to choose the interest rate he wants from the ones offered by the different lenders.
 * **Seamless repayment :** Blockchain also removes the worry of the lenders of having their loans repaid. If the borrower does not repay the loan before the specified due date, the lenders have the mortgage submitted by the borrower which can then be auctioned off.
 
+<div id="flow" />
 
+# Project Design
+
+<p align ="center">
+<img src="https://i.ibb.co/z54hX1v/Untitled-Workspace.png" alt="reva" border="0">
+</p>
 
 <div id="screenshots" />
 
